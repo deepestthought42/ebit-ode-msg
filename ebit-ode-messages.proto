@@ -1,0 +1,70 @@
+syntax = "proto3";
+
+import "interaction-rate.proto"
+
+package EbitODE;
+
+
+enum Status {
+    Idle = 0;
+    SolivingODE = 1;
+}
+
+message Update {
+    Status status = 0;
+    string Message = 1;
+}
+
+
+enum ProblemType {
+    ODEProblem = 0;
+}
+
+
+message ProblemConfiguration {
+}
+
+
+message TimeSpan {
+    double start = 0 [default = 0.0];
+    double end = 1 [default = 1.0];
+}
+
+message Problem {
+    int32 dimensions = 0;
+    ProblemType problem_type = 1;
+    TimeSpan time_span = 2;
+    RateList rate_list = 3;
+    repeated double_saveat = 4;
+    ProblemConfiguration config = 5;
+}
+
+
+message ValuesAtTime {
+    double time = 0;
+    repeated double values = 1;
+}
+
+
+enum ReturnCode {
+    Success = 0;
+    MaxIters = 1;
+    DtLessThanMin = 2;
+    Unstable = 3;
+    InitialFailure = 4;
+    ConvergenceFailure = 5;
+    Failure = 6;
+    Default = 7;
+}
+
+
+message Result {
+    Problem problem = 0;
+    ReturnCode return_code = 1;
+    double start_time = 2;
+    double stop_time = 3;
+    repeated double times = 4;
+    repeated ValuesAtTime values = 5;
+}
+
+

@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package InteractionRates;
+
+/* structure to map, one-to-one, nuclides with mass A, proton number Z and charge state q
+ * onto an index i: {A,Z,q} -> i */
+
+message Index {
+    int32 A = 1; // mass number
+    int32 Z = 2; // proton number
+    int32 q = 3; // charge state
+    int32 i = 4; // index
+}
+
+/* structure to describe Rate constants */
+
+message Rate {
+    double RateInHz  = 1; // Rate in Hz
+    string Description = 2; 
+    Index origin = 3; // index of origin of change 
+    Index destination = 4; // index of destination of changeq
+}
+
+
+/* a list of rates */
+
+message RateList {
+    repeated Rate rates = 1;
+    int32 dimension = 2;
+}
