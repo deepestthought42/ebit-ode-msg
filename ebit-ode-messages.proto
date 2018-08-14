@@ -6,8 +6,8 @@ package EbitODE;
 
 
 enum Status {
-    Idle = 1;
-    SolivingODE = 2;
+    Idle = 0;
+    SolivingODE = 1;
 }
 
 message Update {
@@ -17,7 +17,7 @@ message Update {
 
 
 enum ProblemType {
-    ODEProblem = 1;
+    ODEProblem = 0;
 }
 
 
@@ -47,6 +47,7 @@ message ValuesAtTime {
 
 
 enum ReturnCode {
+    Default = 0;
     Success = 1;
     MaxIters = 2;
     DtLessThanMin = 3;
@@ -54,7 +55,6 @@ enum ReturnCode {
     InitialFailure = 5;
     ConvergenceFailure = 6;
     Failure = 7;
-    Default = 8;
 }
 
 
