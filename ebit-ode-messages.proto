@@ -1,13 +1,42 @@
 syntax = "proto3";
 
-import "interaction-rate.proto";
-
 package EbitODE;
 
 
+/* structure to map, one-to-one, nuclides with mass A, proton number Z and charge state q
+ * onto an index i: {A,Z,q} -> i */
+
+message Index {
+    int32 A = 1; // mass number
+    int32 Z = 2; // proton number
+    int32 q = 3; // charge state
+    int32 i = 4; // index
+}
+
+/* structure to describe Rate constants */
+
+message Rate {
+    double RateInHz  = 1; // Rate in Hz
+    string Description = 2; 
+    Index origin = 3; // index of origin of change 
+    Index destination = 4; // index of destination of changeq
+}
+
+
+/* a list of rates */
+
+message RateList {
+    repeated Rate rates = 1;
+    int32 dimension = 2;
+}
+
+
+
+/* Service definitions */
+
 enum Status {
-    Idle = 1;
-    SolivingODE = 2;
+    Idle = 0;
+    SolivingODE = 1;
 }
 
 message Update {
@@ -17,7 +46,7 @@ message Update {
 
 
 enum ProblemType {
-    ODEProblem = 1;
+    ODEProblem = 0;
 }
 
 
@@ -34,7 +63,7 @@ message Problem {
     int32 dimensions = 1;
     ProblemType problem_type = 2;
     TimeSpan time_span = 3;
-    RateList rate_list = 4;
+    InteractionRates.RateList rate_list = 4;
     repeated double saveat = 5;
     ProblemConfiguration config = 6;
 }
@@ -47,6 +76,7 @@ message ValuesAtTime {
 
 
 enum ReturnCode {
+    Default = 0;
     Success = 1;
     MaxIters = 2;
     DtLessThanMin = 3;
@@ -54,7 +84,6 @@ enum ReturnCode {
     InitialFailure = 5;
     ConvergenceFailure = 6;
     Failure = 7;
-    Default = 8;
 }
 
 
