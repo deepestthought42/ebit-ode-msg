@@ -60,10 +60,10 @@ message TimeSpan {
 }
 
 message Problem {
-    int32 dimensions = 1;
-    ProblemType problem_type = 2;
-    TimeSpan time_span = 3;
-    InteractionRates.RateList rate_list = 4;
+    ProblemType problem_type = 1;
+    TimeSpan time_span = 2;
+    RateList rate_list = 3;
+    repeated double initial_values = 4;
     repeated double saveat = 5;
     ProblemConfiguration config = 6;
 }
