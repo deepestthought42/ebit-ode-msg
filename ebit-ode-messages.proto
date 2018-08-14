@@ -71,7 +71,7 @@ message Problem {
 
 
 message ValuesPerIndex {
-    Index index = 1
+    Index index = 1;
     repeated double values = 2;
 }
 
