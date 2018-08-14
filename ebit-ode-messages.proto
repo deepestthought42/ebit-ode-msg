@@ -94,7 +94,7 @@ message Result {
     double start_time = 3;
     double stop_time = 4;
     repeated double times = 5;
-    repeated ValuesAtTime values = 6;
+    repeated ValuesPerIndex values = 6;
 }
 
 
