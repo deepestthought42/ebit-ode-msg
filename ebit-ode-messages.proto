@@ -7,19 +7,19 @@ package EbitODE;
  * onto an index i: {A,Z,q} -> i */
 
 message Index {
-    int32 A = 1; // mass number
-    int32 Z = 2; // proton number
-    int32 q = 3; // charge state
-    int32 i = 4; // index
+    required int32 A = 1; // mass number
+    required int32 Z = 2; // proton number
+    required int32 q = 3; // charge state
+    required int32 i = 4; // index
 }
 
 /* structure to describe Rate constants */
 
 message Rate {
-    double RateInHz  = 1; // Rate in Hz
-    string Description = 2; 
-    Index origin = 3; // index of origin of change 
-    Index destination = 4; // index of destination of changeq
+    required double RateInHz  = 1; // Rate in Hz
+    required string Description = 2; 
+    required Index origin = 3; // index of origin of change 
+    required Index destination = 4; // index of destination of changeq
 }
 
 
@@ -27,7 +27,7 @@ message Rate {
 
 message RateList {
     repeated Rate rates = 1;
-    int32 dimension = 2;
+    required int32 dimension = 2;
 }
 
 
@@ -40,8 +40,8 @@ enum Status {
 }
 
 message Update {
-    Status status = 1;
-    string Message = 2;
+    required Status status = 1;
+    required string Message = 2;
 }
 
 
@@ -55,23 +55,23 @@ message ProblemConfiguration {
 
 
 message TimeSpan {
-    double start = 1;
-    double stop = 2;
+    required double start = 1;
+    required double stop = 2;
 }
 
 message Problem {
-    ProblemType problem_type = 1;
-    TimeSpan time_span = 2;
-    RateList rate_list = 3;
+    required ProblemType problem_type = 1;
+    required TimeSpan time_span = 2;
+    required RateList rate_list = 3;
     repeated double initial_values = 4;
     repeated double saveat = 5;
-    ProblemConfiguration config = 6;
+    required ProblemConfiguration config = 6;
     repeated Index indices = 7;
 }
 
 
 message ValuesPerIndex {
-    Index index = 1;
+    required Index index = 1;
     repeated double values = 2;
 }
 
@@ -89,10 +89,10 @@ enum ReturnCode {
 
 
 message Result {
-    Problem problem = 1;
-    ReturnCode return_code = 2;
-    double start_time = 3;
-    double stop_time = 4;
+    required Problem problem = 1;
+    required ReturnCode return_code = 2;
+    required double start_time = 3;
+    required double stop_time = 4;
     repeated double times = 5;
     repeated ValuesPerIndex values = 6;
 }
