@@ -56,7 +56,7 @@ message ProblemConfiguration {
 
 message TimeSpan {
     double start = 1;
-    double end = 2;
+    double stop = 2;
 }
 
 message Problem {
