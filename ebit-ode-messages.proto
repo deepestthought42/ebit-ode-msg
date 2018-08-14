@@ -66,11 +66,12 @@ message Problem {
     repeated double initial_values = 4;
     repeated double saveat = 5;
     ProblemConfiguration config = 6;
+    repeated Index indices = 7;
 }
 
 
-message ValuesAtTime {
-    double time = 1;
+message ValuesPerIndex {
+    Index index = 1
     repeated double values = 2;
 }
 
