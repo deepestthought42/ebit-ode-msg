@@ -31,12 +31,12 @@ message TimeSpan {
 }
 
 message Problem {
-    int32 dimensions = 0;
     ProblemType problem_type = 1;
     TimeSpan time_span = 2;
     RateList rate_list = 3;
-    repeated double_saveat = 4;
-    ProblemConfiguration config = 5;
+    repeated double initial_values = 4;
+    repeated double saveat = 5;
+    ProblemConfiguration config = 6;
 }
 
 
