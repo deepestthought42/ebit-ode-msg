@@ -105,7 +105,7 @@ enum MessageType {
 }
 
 message Message {
-    required MessageType type = 1;
+    required MessageType MsgType = 1;
     optional Problem ODEProblem = 2;
     optional Result ODEResult = 3;
     optional Status status = 4;
