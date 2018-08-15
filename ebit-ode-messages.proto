@@ -102,6 +102,7 @@ enum MessageType {
     SolveODE = 1;
     ODEResult = 2;
     StatusUpdate = 3;
+    StopServer = 4;
 }
 
 message Message {
