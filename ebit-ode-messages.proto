@@ -36,7 +36,7 @@ message RateList {
 
 enum Status {
     Idle = 0;
-    SolivingODE = 1;
+    SolivingODEInProgress = 1;
 }
 
 message Update {
@@ -98,3 +98,15 @@ message Result {
 }
 
 
+enum MessageType {
+    SolveODE = 1;
+    ODEResult = 2;
+    StatusUpdate = 3;
+}
+
+message Message {
+    required MessageType type = 1;
+    optional Problem ODEProblem = 2;
+    optional Result ODEResult = 3;
+    optional Status status = 4;
+}
