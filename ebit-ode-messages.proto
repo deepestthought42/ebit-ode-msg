@@ -107,7 +107,7 @@ enum MessageType {
     ODEResult = 2;
     StatusUpdate = 3;
     StopServer = 4;
-    ErrorEncountered = 5;
+    Error = 5;
 }
 
 
