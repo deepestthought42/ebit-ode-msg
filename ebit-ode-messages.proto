@@ -98,16 +98,24 @@ message Result {
 }
 
 
+message ErrorEncountered {
+    required string msg = 1;
+}
+
 enum MessageType {
     SolveODE = 1;
     ODEResult = 2;
     StatusUpdate = 3;
     StopServer = 4;
+    ErrorEncountered = 5;
 }
+
+
 
 message Message {
     required MessageType MsgType = 1;
     optional Problem ODEProblem = 2;
     optional Result ODEResult = 3;
     optional Status status = 4;
+    optional ErrorEncountered err = 5;
 }
