@@ -59,6 +59,12 @@ message TimeSpan {
     required double stop = 2;
 }
 
+
+message InitialPopulation {
+    required Index index = 1;
+    required double value = 2;
+}
+
 message Problem {
     required ProblemType problem_type = 1;
     required TimeSpan time_span = 2;
@@ -67,6 +73,7 @@ message Problem {
     repeated double saveat = 5;
     required ProblemConfiguration config = 6;
     repeated Index indices = 7;
+    repeated InitialPopulation initial_population = 8;
 }
 
 
@@ -74,7 +81,6 @@ message ValuesPerIndex {
     required Index index = 1;
     repeated double values = 2;
 }
-
 
 enum ReturnCode {
     Default = 0;
