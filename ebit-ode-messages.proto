@@ -1,6 +1,6 @@
 syntax = "proto2";
 
-package EbitODE;
+package EbitODEMessages;
 
 
 /* structure to map, one-to-one, nuclides with mass A, proton number Z and charge state q
@@ -15,21 +15,12 @@ message Index {
 
 /* structure to describe Rate constants */
 
-message Rate {
-    required double RateInHz  = 1; // Rate in Hz
+message MatrixValue {
+    required double Value  = 1; 
     required string Description = 2; 
-    required Index origin = 3; // index of origin of change 
-    required Index destination = 4; // index of destination of changeq
+    required Index row = 3; 
+    required Index column = 4; 
 }
-
-
-/* a list of rates */
-
-message RateList {
-    repeated Rate rates = 1;
-    required int32 dimension = 2;
-}
-
 
 
 /* Service definitions */
@@ -50,9 +41,6 @@ enum ProblemType {
 }
 
 
-message ProblemConfiguration {
-}
-
 
 message TimeSpan {
     required double start = 1;
@@ -60,20 +48,42 @@ message TimeSpan {
 }
 
 
-message InitialPopulation {
+message ValueForIndex {
     required Index index = 1;
     required double value = 2;
 }
 
-message Problem {
+message DiffEqParameters {
+    repeated double qVe = 1;
+    repeated double qVt = 2;
+    repeated double mass_number = 3;
+    repeated double spitzer_divided_by_overlap = 4;
+    required double electron_radius_in_m_squared = 5;
+    required double one_over_pi_times_L = 6;
+    
+    repeated MatrixValue inverted_collision_constant = 7;
+    repeated MatrixValue dCharge_ex_divided_by_N_times_tau = 9;
+    repeated MatrixValue rate_of_change_divided_by_N = 10;
+
+    required int32 no_dimensions = 11;
+    repeated Index indices = 12;
+    repeated double initial_population = 13;
+    repeated double initial_temperature = 14;
+}
+
+message ProblemParameters {
     required ProblemType problem_type = 1;
     required TimeSpan time_span = 2;
-    required RateList rate_list = 3;
-    repeated double initial_values = 4;
-    repeated double saveat = 5;
-    required ProblemConfiguration config = 6;
-    repeated Index indices = 7;
-    repeated InitialPopulation initial_population = 8;
+}
+
+message SolverParameters {
+    repeated double saveat = 1;   
+}
+
+message SolveODEProblem {
+    required ProblemParameters problem_parameters = 1;
+    required DiffEqParameters diff_eq_parameters = 2;
+    required SolverParameters sovler_parameters = 3;
 }
 
 
@@ -95,7 +105,7 @@ enum ReturnCode {
 
 
 message Result {
-    required Problem problem = 1;
+    required SolveODEProblem problem = 1;
     required ReturnCode return_code = 2;
     required double start_time = 3;
     required double stop_time = 4;
@@ -120,7 +130,7 @@ enum MessageType {
 
 message Message {
     required MessageType MsgType = 1;
-    optional Problem ODEProblem = 2;
+    optional SolveODEProblem ODEProblem = 2;
     optional Result ODEResult = 3;
     optional Status status = 4;
     optional ErrorEncountered err = 5;
