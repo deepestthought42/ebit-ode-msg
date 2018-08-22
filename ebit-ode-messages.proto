@@ -67,8 +67,8 @@ message DiffEqParameters {
 
     required int32 no_dimensions = 11;
     repeated Index indices = 12;
-    repeated double initial_population = 13;
-    repeated double initial_temperature = 14;
+    repeated ValueForIndex initial_population = 13;
+    repeated ValueForIndex initial_temperature = 14;
 }
 
 message ProblemParameters {
@@ -83,7 +83,7 @@ message SolverParameters {
 message SolveODEProblem {
     required ProblemParameters problem_parameters = 1;
     required DiffEqParameters diff_eq_parameters = 2;
-    required SolverParameters sovler_parameters = 3;
+    required SolverParameters solver_parameters = 3;
 }
 
 
