@@ -6,20 +6,19 @@ package EbitODEMessages;
 /* structure to map, one-to-one, nuclides with mass A, proton number Z and charge state q
  * onto an index i: {A,Z,q} -> i */
 
-message Index {
-    required int32 A = 1; // mass number
-    required int32 Z = 2; // proton number
-    required int32 q = 3; // charge state
-    required int32 i = 4; // index
+message Nuclide {
+    required uint32 A = 1; // mass number
+    required uint32 Z = 2; // proton number
+    required uint32 q = 3; // charge state
+    required uint32 i = 4; // index
 }
 
 /* structure to describe Rate constants */
 
 message MatrixValue {
     required double Value  = 1; 
-    required string Description = 2; 
-    required Index row = 3; 
-    required Index column = 4; 
+    required uint32 row = 2; 
+    required uint32 column = 3; 
 }
 
 
@@ -47,9 +46,8 @@ message TimeSpan {
     required double stop = 2;
 }
 
-
 message ValueForIndex {
-    required Index index = 1;
+    required uint32 index = 1;
     required double value = 2;
 }
 
@@ -65,8 +63,7 @@ message DiffEqParameters {
     repeated MatrixValue dCharge_ex_divided_by_N_times_tau = 9;
     repeated MatrixValue rate_of_change_divided_by_N = 10;
 
-    required int32 no_dimensions = 11;
-    repeated Index indices = 12;
+    required uint32 no_dimensions = 11;
     repeated ValueForIndex initial_population = 13;
     repeated ValueForIndex initial_temperature = 14;
 }
@@ -81,14 +78,15 @@ message SolverParameters {
 }
 
 message SolveODEProblem {
-    required ProblemParameters problem_parameters = 1;
-    required DiffEqParameters diff_eq_parameters = 2;
-    required SolverParameters solver_parameters = 3;
+    repeated Nuclide nuclides = 1;
+    required ProblemParameters problem_parameters = 2;
+    required DiffEqParameters diff_eq_parameters = 3;
+    required SolverParameters solver_parameters = 4;
 }
 
 
-message ValuesPerIndex {
-    required Index index = 1;
+message ValuesPerNuclide {
+    required Nuclide nuclide = 1;
     repeated double values = 2;
 }
 
