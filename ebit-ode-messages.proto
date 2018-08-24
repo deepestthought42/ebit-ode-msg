@@ -16,7 +16,7 @@ message Nuclide {
 /* structure to describe Rate constants */
 
 message MatrixValue {
-    required double Value  = 1; 
+    required double value  = 1; 
     required uint32 row = 2; 
     required uint32 column = 3; 
 }
@@ -31,7 +31,7 @@ enum Status {
 
 message Update {
     required Status status = 1;
-    required string Message = 2;
+    required string message = 2;
 }
 
 
@@ -46,9 +46,10 @@ message TimeSpan {
     required double stop = 2;
 }
 
-message ValueForIndex {
+message StartingValues {
     required uint32 index = 1;
-    required double value = 2;
+    required double number_of_particles = 2;
+    required double temperature_in_ev = 2;
 }
 
 message DiffEqParameters {
@@ -127,9 +128,9 @@ enum MessageType {
 
 
 message Message {
-    required MessageType MsgType = 1;
-    optional SolveODEProblem ODEProblem = 2;
-    optional Result ODEResult = 3;
+    required MessageType msg_type = 1;
+    optional SolveODEProblem ode_problem = 2;
+    optional Result ode_result = 3;
     optional Status status = 4;
     optional ErrorEncountered err = 5;
 }
