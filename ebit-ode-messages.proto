@@ -46,7 +46,7 @@ message TimeSpan {
     required double stop = 2;
 }
 
-message StartingValues {
+message InitialValue {
     required uint32 index = 1;
     required double number_of_particles = 2;
     required double temperature_in_ev = 2;
@@ -65,8 +65,7 @@ message DiffEqParameters {
     repeated MatrixValue rate_of_change_divided_by_N = 10;
 
     required uint32 no_dimensions = 11;
-    repeated ValueForIndex initial_population = 13;
-    repeated ValueForIndex initial_temperature = 14;
+    repeated InitialValues initial_values = 13;
 }
 
 message ProblemParameters {
