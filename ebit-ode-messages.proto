@@ -108,7 +108,8 @@ message Result {
     required double start_time = 3;
     required double stop_time = 4;
     repeated double times = 5;
-    repeated ValuesPerNuclide values = 6;
+    repeated ValuesPerNuclide n = 6;
+    repeated ValuesPerNuclide kT = 7;
 }
 
 
